@@ -1,2 +1,141 @@
-# calculator
-simple calculator app
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scientific Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; margin: 0;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    }
+    .calculator {
+      width: 380px; background: #222; color: #fff;
+      padding: 20px; border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    }
+    #display {
+      width: 100%; height: 56px; margin-bottom: 14px;
+      text-align: right; padding: 10px 12px; font-size: 24px;
+      border-radius: 10px; border: none; background: #111; color: #00ff9d;
+    }
+    .buttons {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+    }
+    button {
+      padding: 14px; font-size: 17px; cursor: pointer; border: none;
+      border-radius: 10px; background: #3a3a3a; color: #fff; transition: 0.15s;
+    }
+    button:hover { background: #555; }
+    .operator { background: #ff9500; }
+    .operator:hover { background: #e08900; }
+    .special { background: #007aff; }
+    .special:hover { background: #005bb5; }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly />
+
+    <div class="buttons">
+      <button onclick="clearDisplay()" class="special">C</button>
+      <button onclick="del()">DEL</button>
+      <button onclick="append('(')">(</button>
+      <button onclick="append(')')">)</button>
+      <button onclick="append('/')">÷</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('*')">×</button>
+      <button onclick="sqrt()">√</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')">−</button>
+      <button onclick="cbrt()">∛</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('+')">+</button>
+      <button onclick="square()">x²</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="append('Math.PI')">π</button>
+      <button onclick="power()">x^y</button>
+      <button class="operator" onclick="calculate()">=</button>
+
+      <button onclick="sin()">sin</button>
+      <button onclick="cos()">cos</button>
+      <button onclick="tan()">tan</button>
+      <button onclick="log10()">log</button>
+      <button onclick="ln()">ln</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function append(val) { display.value += val; }
+    function clearDisplay() { display.value = ''; }
+    function del() { display.value = display.value.slice(0, -1); }
+
+    function calculate() {
+      try { display.value = eval(display.value); }
+      catch { display.value = 'Error'; }
+    }
+
+    function sqrt() {
+      try { display.value = Math.sqrt(eval(display.value)); }
+      catch { display.value = 'Error'; }
+    }
+
+    function cbrt() {
+      try { display.value = Math.cbrt(eval(display.value)); }
+      catch { display.value = 'Error'; }
+    }
+
+    function square() {
+      try { display.value = Math.pow(eval(display.value), 2); }
+      catch { display.value = 'Error'; }
+    }
+
+    function power() {
+      try {
+        let base = eval(display.value);
+        let exponent = prompt("Enter exponent:");
+        display.value = Math.pow(base, exponent);
+      } catch { display.value = 'Error'; }
+    }
+
+    function sin() {
+      try { display.value = Math.sin(eval(display.value) * Math.PI / 180); }
+      catch { display.value = 'Error'; }
+    }
+
+    function cos() {
+      try { display.value = Math.cos(eval(display.value) * Math.PI / 180); }
+      catch { display.value = 'Error'; }
+    }
+
+    function tan() {
+      try { display.value = Math.tan(eval(display.value) * Math.PI / 180); }
+      catch { display.value = 'Error'; }
+    }
+
+    function log10() {
+      try { display.value = Math.log10(eval(display.value)); }
+      catch { display.value = 'Error'; }
+    }
+
+    function ln() {
+      try { display.value = Math.log(eval(display.value)); }
+      catch { display.value = 'Error'; }
+    }
+  </script>
+</body>
+</html>313e2wqsda
